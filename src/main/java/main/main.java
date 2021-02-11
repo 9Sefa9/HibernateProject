@@ -40,7 +40,6 @@ public class main {
         Transaction transaction = session.beginTransaction();
 
         session.save(a);
-
        // a = (Alien)session.get(Alien.class,5);
 
         transaction.commit();
