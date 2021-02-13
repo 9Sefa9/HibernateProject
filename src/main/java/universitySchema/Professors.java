@@ -1,12 +1,13 @@
 package universitySchema;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name="professors_entity")
+@Entity
 public class Professors {
     @Id
     private int persNr;
@@ -15,13 +16,13 @@ public class Professors {
     private String name;
 
     @OneToMany
-    private List<Assistants> assistants;
+    private List<Assistants> assistants = new ArrayList<>();
 
     @OneToMany
-    private List<Lectures> lectures;
+    private List<Lectures> lectures= new ArrayList<>();
 
     @OneToMany
-    private List<Students> students;
+    private List<Students> students= new ArrayList<>();
 
     public int getPersNr() {
         return persNr;

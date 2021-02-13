@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name="lectures_entity")
+@Entity
 public class Lectures {
     @Id
     private int vorlNr;
@@ -14,10 +15,10 @@ public class Lectures {
     private String title;
 
     @ManyToMany
-    private List<Students> students;
+    private List<Students> students= new ArrayList<>();
 
     @ManyToOne
-    private Professors professor;
+    private Professors professors;
 
     public int getVorlNr() {
         return vorlNr;
@@ -52,10 +53,10 @@ public class Lectures {
     }
 
     public Professors getProfessor() {
-        return professor;
+        return professors;
     }
 
-    public void setProfessor(Professors professor) {
-        this.professor = professor;
+    public void setProfessors(Professors professors) {
+        this.professors = professors;
     }
 }

@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.List;
 
-@Entity(name="assistants_entity")
+@Entity
 public class Assistants {
 
     @Id

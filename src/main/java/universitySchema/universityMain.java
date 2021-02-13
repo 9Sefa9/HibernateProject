@@ -17,10 +17,6 @@ public class universityMain {
             Assistants assistants = new Assistants();
             Lectures lectures = new Lectures();
 
-            students.setMatrNr(24002);
-            students.setName("Xenokrates");
-            students.setSemester(18);
-
             professors.setPersNr(2126);
             professors.setName("Sokrates");
             professors.setRank("C4");
@@ -29,10 +25,25 @@ public class universityMain {
             assistants.setPersNr(3002);
             assistants.setName("Platon");
             assistants.setExpertiseArea("Ideenlehre");
+            assistants.setProfessors(professors);
 
             lectures.setVorlNr(5001);
             lectures.setTitle("Grundzüge");
             lectures.setSws(4);
+            lectures.setProfessors(professors);
+
+            students.getLectures().add(lectures);
+            lectures.getStudents().add(students);
+            professors.getAssistants().add(assistants);
+            professors.getLectures().add(lectures);
+            professors.getStudents().add(students);
+
+            students.setMatrNr(24002);
+            students.setName("Xenokrates");
+            students.setSemester(18);
+            students.setProfessors(professors);
+
+//---------------------
 
             //configures hibernate.cfg.xml
             Configuration config = new Configuration().configure();
@@ -48,9 +59,9 @@ public class universityMain {
             Transaction transaction = session.beginTransaction();
 
             session.save(students);
-            session.save(professors);
-            session.save(assistants);
-            session.save(lectures);
+           // session.save(professors);
+           // session.save(assistants);
+           // session.save(lectures);
             // a = (Alien)session.get(Alien.class,5);
 
             transaction.commit();

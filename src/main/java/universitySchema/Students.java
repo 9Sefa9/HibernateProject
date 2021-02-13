@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name="students_entity")
+@Entity
 public class Students {
     @Id
     private int matrNr;
@@ -19,7 +20,7 @@ public class Students {
     private Professors professors;
 
     @ManyToMany
-    private List<Lectures> lectures;
+    private List<Lectures> lectures= new ArrayList<>();
 
     public int getMatrNr() {
         return matrNr;
