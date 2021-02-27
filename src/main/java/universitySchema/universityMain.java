@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 public class universityMain {
-
+/*
         public static void main(String[] args){
             Students students = new Students();
             Professors professors = new Professors();
@@ -70,6 +70,6 @@ public class universityMain {
             session.close();
             sr.close();
         }
-
+*/
 
 }

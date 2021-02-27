@@ -1,9 +1,8 @@
 package aliens;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 /*Q:    What is : @Entity(name="alien_nameEntity")
 *                 @Table(name="alien_nameTable")
 * A:    The name in @Entity is for JPA-QL queries, it defaults to
@@ -18,31 +17,25 @@ import javax.persistence.Table;
 *    private String name
 * */
 
-@Entity(name="alien_entity")
-@Table(name="alien_table")
+@Entity
 public class Alien {
     @Id
     private int id;
-    @Column(name="name")
     private AlienName name;
-    @Column(name="color")
     private String color;
 
+    @OneToMany(mappedBy="alien")
+    private Collection<Laptop> laps = new ArrayList<Laptop>();
+
+    public Alien(){
+
+    }
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public AlienName getName() {
@@ -52,4 +45,32 @@ public class Alien {
     public void setName(AlienName name) {
         this.name = name;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+
+    public Collection<Laptop> getLaps() {
+        return laps;
+    }
+
+    public void setLaps(Collection<Laptop> laps) {
+        this.laps = laps;
+    }
+
+    @Override
+    public String toString() {
+        return "Alien{" +
+                "id=" + id +
+                ", name=" + name +
+                ", color='" + color + '\'' +
+                ", laps=" + getLaps() +
+                '}';
+    }
+
 }
