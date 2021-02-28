@@ -1,6 +1,11 @@
 package aliens;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
 /*Q:    What is : @Entity(name="alien_nameEntity")
@@ -18,6 +23,9 @@ import java.util.Collection;
 * */
 
 @Entity
+@Cacheable
+@Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
+
 public class Alien {
     @Id
     private int id;

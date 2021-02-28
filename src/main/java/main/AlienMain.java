@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 
 import java.util.ArrayList;
@@ -41,17 +42,35 @@ public class AlienMain {
         config.addAnnotatedClass(Laptop.class);
         config.addAnnotatedClass(Alien.class);
         SessionFactory factory = config.buildSessionFactory();
-        Session session = factory.openSession();
 
-        Transaction transaction = session.beginTransaction();
+        //Second-level Caching:
+        //####Session 1
+        Session session1 = factory.openSession();
+        session1.beginTransaction();
 
-     //   session.save(a);
-
-        Alien a1 = session.get(Alien.class,1);
-
+        Query q1 = session1.createQuery("from Alien where id=1");
+        q1.setCacheable(true);
+        Alien a1 = (Alien)q1.uniqueResult();
         System.out.println(a1);
 
-        transaction.commit();
+        session1.getTransaction().commit();
+        session1.close();
+
+        System.out.println("SESSION 1 END");
+        //####Session 2
+
+        Session session2 = factory.openSession();
+        session2.beginTransaction();
+
+        Query q2 = session2.createQuery("from Alien where id=1");
+        q2.setCacheable(true);
+        Alien a2 = (Alien)q2.uniqueResult();
+        System.out.println(a2);
+
+        session2.getTransaction().commit();
+        session2.close();
+
+        System.out.println("SESSION 2 END");
         /*
 
         lazy approach. It will Fetch, only if you need it+

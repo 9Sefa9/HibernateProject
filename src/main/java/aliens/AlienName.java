@@ -1,5 +1,9 @@
 package aliens;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Embeddable;
 /*Q: What is @Embeddable ?
 * A: With @Embeddable we say, that we want to embedd "this" class into "that" class.
@@ -8,6 +12,8 @@ import javax.persistence.Embeddable;
 *
 * */
 @Embeddable
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class AlienName {
 
     private String fname;
