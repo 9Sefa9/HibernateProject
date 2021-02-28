@@ -4,15 +4,18 @@ package main;
 import aliens.Alien;
 import aliens.AlienName;
 import aliens.Laptop;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /*
 * Q: How to Fetch Data ?
@@ -43,40 +46,38 @@ public class AlienMain {
         config.addAnnotatedClass(Alien.class);
         SessionFactory factory = config.buildSessionFactory();
 
-        //Second-level Caching:
+        //Second-level Caching - Using HQL Query
         //####Session 1
         Session session1 = factory.openSession();
         session1.beginTransaction();
 
-        Query q1 = session1.createQuery("from Alien where id=1");
-        q1.setCacheable(true);
-        Alien a1 = (Alien)q1.uniqueResult();
-        System.out.println("AlienClass: "+a1);
-
-        Query q2 = session1.createQuery("select a.id from Alien a where a.id= :firstAlienId");
-        q2.setParameter("firstAlienId",1);
-        Integer aid = (Integer)q2.uniqueResult();
-        System.out.println("AlienID: "+aid);
+        Query q1 = session1.createQuery("select a.id from Alien a where a.id= :firstAlienId");
+        q1.setParameter("firstAlienId",1);
+        Integer aid = (Integer)q1.uniqueResult();
+        System.out.println("HQL - AlienID: "+aid);
 
         session1.getTransaction().commit();
         session1.close();
 
         System.out.println("SESSION 1 END");
-       /* //####Session 2
-
+        //####Session 2 - Using SQL - Query
         Session session2 = factory.openSession();
         session2.beginTransaction();
 
-        Query q2 = session2.createQuery("from Alien where id=1");
+        NativeQuery q2 = session2.createNativeQuery("select * from alien where id=1");
         q2.setCacheable(true);
-        Alien a2 = (Alien)q2.uniqueResult();
-        System.out.println(a2);
+        q2.addEntity(Alien.class);
+
+        List<Alien> a2 = q2.list();
+        System.out.println("SQL - ALienClass:");
+        for(Alien alien: a2)
+            System.out.println(alien);
 
         session2.getTransaction().commit();
         session2.close();
 
         System.out.println("SESSION 2 END");
-        */
+
 
         /*
 
