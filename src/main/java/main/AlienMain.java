@@ -19,7 +19,7 @@ import java.util.Collection;
 *    where 5 is the primary key of that entitys attribute.
 * */
 
-public class main {
+public class AlienMain {
     public static void main(String[] args){
         Alien a = new Alien();
         AlienName aa = new AlienName();
@@ -45,12 +45,32 @@ public class main {
 
         Transaction transaction = session.beginTransaction();
 
+
+        /*
+
+        lazy approach. It will Fetch, only if you need it+
+        in Lazy fetch type, Hibernate won’t load the relationships for any particular object instance.
+
+        Two queries are done:  1) Alien and 2) Laptops.
+        Set a Fetch=FetchType.Eager inside an Entity class to change the query type.
+
+        Eager will by default load ALL of the relationships related to a particular object loaded by Hibernate.
+        ALL IN ALL:
+
+        FetchType.LAZY = Doesn’t load the relationships unless explicitly “asked for” via getter
+        FetchType.EAGER = Loads ALL relationships
+
+        1) Query
         Alien a1 = session.get(Alien.class,1);
+
+
+        2) Query
         Collection<Laptop> laps = a1.getLaps();
 
         for(Laptop li : laps){
             System.out.println(li);
         }
+         */
        // session.save(a);
         transaction.commit();
 
