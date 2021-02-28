@@ -51,13 +51,18 @@ public class AlienMain {
         Query q1 = session1.createQuery("from Alien where id=1");
         q1.setCacheable(true);
         Alien a1 = (Alien)q1.uniqueResult();
-        System.out.println(a1);
+        System.out.println("AlienClass: "+a1);
+
+        Query q2 = session1.createQuery("select a.id from Alien a where a.id= :firstAlienId");
+        q2.setParameter("firstAlienId",1);
+        Integer aid = (Integer)q2.uniqueResult();
+        System.out.println("AlienID: "+aid);
 
         session1.getTransaction().commit();
         session1.close();
 
         System.out.println("SESSION 1 END");
-        //####Session 2
+       /* //####Session 2
 
         Session session2 = factory.openSession();
         session2.beginTransaction();
@@ -71,6 +76,8 @@ public class AlienMain {
         session2.close();
 
         System.out.println("SESSION 2 END");
+        */
+
         /*
 
         lazy approach. It will Fetch, only if you need it+
