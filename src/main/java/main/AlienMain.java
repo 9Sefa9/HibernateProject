@@ -45,7 +45,13 @@ public class AlienMain {
 
         Transaction transaction = session.beginTransaction();
 
+     //   session.save(a);
 
+        Alien a1 = session.get(Alien.class,1);
+
+        System.out.println(a1);
+
+        transaction.commit();
         /*
 
         lazy approach. It will Fetch, only if you need it+
@@ -70,9 +76,11 @@ public class AlienMain {
         for(Laptop li : laps){
             System.out.println(li);
         }
-         */
-       // session.save(a);
+
+        // session.save(a);
         transaction.commit();
+         */
+
 
     }
 }

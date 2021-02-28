@@ -66,9 +66,9 @@ public class Alien {
     @Override
     public String toString() {
         return "Alien{" +
-                "id=" + id +
-                ", name=" + name +
-                ", color='" + color + '\'' +
+                "id=" + getId() +
+                ", name=" + getName() +
+                ", color='" + getColor() + '\'' +
                 ", laps=" + getLaps() +
                 '}';
     }

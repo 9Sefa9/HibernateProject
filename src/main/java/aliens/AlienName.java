@@ -37,4 +37,13 @@ public class AlienName {
     public void setMname(String mname) {
         this.mname = mname;
     }
+
+    @Override
+    public String toString() {
+        return "AlienName{" +
+                "fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", mname='" + mname + '\'' +
+                '}';
+    }
 }
