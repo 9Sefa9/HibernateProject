@@ -67,7 +67,7 @@ public class AlienMain {
         List<Alien> a2 = q2.list();
         System.out.println("SQL - AlienClass:");
         for(Alien alien: a2)
-            System.out.println(alien);
+            System.out.println("An alien:"+alien);
 
         session2.getTransaction().commit();
         session2.close();
