@@ -19,7 +19,6 @@ public class AlienName {
     private String fname;
     private String lname;
     private String mname;
-
     public String getFname() {
         return fname;
     }

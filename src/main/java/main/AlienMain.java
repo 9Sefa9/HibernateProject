@@ -1,21 +1,17 @@
 package main;
 
 
-import aliens.Alien;
-import aliens.AlienName;
-import aliens.Laptop;
-import org.hibernate.SQLQuery;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import aliens.Alien;
+import aliens.AlienName;
+import aliens.Laptop;
 
 /*
 * Q: How to Fetch Data ?
@@ -64,12 +60,12 @@ public class AlienMain {
         Session session2 = factory.openSession();
         session2.beginTransaction();
 
-        NativeQuery q2 = session2.createNativeQuery("select * from alien where id=1");
+        NativeQuery q2 = session2.createNativeQuery("select * from Alien where id=1");
         q2.setCacheable(true);
         q2.addEntity(Alien.class);
 
         List<Alien> a2 = q2.list();
-        System.out.println("SQL - ALienClass:");
+        System.out.println("SQL - AlienClass:");
         for(Alien alien: a2)
             System.out.println(alien);
 
@@ -82,7 +78,7 @@ public class AlienMain {
         /*
 
         lazy approach. It will Fetch, only if you need it+
-        in Lazy fetch type, Hibernate won’t load the relationships for any particular object instance.
+        in Lazy fetch type, Hibernate wonâ€™t load the relationships for any particular object instance.
 
         Two queries are done:  1) Alien and 2) Laptops.
         Set a Fetch=FetchType.Eager inside an Entity class to change the query type.
@@ -90,7 +86,7 @@ public class AlienMain {
         Eager will by default load ALL of the relationships related to a particular object loaded by Hibernate.
         ALL IN ALL:
 
-        FetchType.LAZY = Doesn’t load the relationships unless explicitly “asked for” via getter
+        FetchType.LAZY = Doesnâ€™t load the relationships unless explicitly â€œasked forâ€� via getter
         FetchType.EAGER = Loads ALL relationships
 
         1) Query

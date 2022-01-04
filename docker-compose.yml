@@ -1,0 +1,18 @@
+services:
+
+  mySQLHibernate:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: hibernate
+      MYSQL_ROOT_PASSWORD: 457b2454a15b3fd9e02cd18041cfc4ba878d0c0711724804cb22119
+      MYSQL_USER: Database
+      MYSQL_PASSWORD: 31213
+    ports:
+    - "3306:3306"
+  adminerHibernate:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
